@@ -3,12 +3,9 @@ import yt_dlp
 
 app = Flask(__name__)
 
-
-# 👇 Вот сюда вставь
 @app.route('/')
 def root():
     return "Сервер работает!"
-
 
 @app.route('/get_link', methods=['POST'])
 def get_link():
@@ -35,15 +32,10 @@ def get_link():
                 "duration": info.get("duration")
             })
 
-
-
     except Exception as e:
+        import traceback
+        traceback.print_exc()  # 🔥 Лог ошибки в Render
         return jsonify({"error": str(e)}), 500
-
-
-
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
-
